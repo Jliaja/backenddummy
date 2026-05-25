@@ -38,8 +38,13 @@ export const getProducts = async (req: Request, res: Response) => {
       totalPages: Math.ceil(total / limit)
     });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch products' });
-  }
+  console.error('GET PRODUCTS ERROR:', error);
+
+  res.status(500).json({
+    error: 'Failed to fetch products',
+    details: error
+  });
+}
 };
 
 export const getProductById = async (req: Request, res: Response): Promise<void> => {
